@@ -5,7 +5,6 @@ import org.codehaus.jackson.map.ObjectReader;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 

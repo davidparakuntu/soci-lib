@@ -24,10 +24,13 @@ public class Soci {
 
         initParams.put("com.sun.jersey.api.json.POJOMappingFeature", "true");
 
+        initParams.put("com.sun.jersey.spi.container.ContainerResponseFilters","com.dav.soci.rest.CORSFilter");
+
         System.out.println("Starting grizzly...");
         try {
             SelectorThread threadSelector =
                     GrizzlyWebContainerFactory.create(baseUri, initParams);
+
             System.out.println(String.format("Jersey started with WADL "
                     + "available at %sapplication.wadl.", baseUri));
         } catch (Exception e) {
