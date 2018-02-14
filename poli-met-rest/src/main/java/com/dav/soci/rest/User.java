@@ -10,8 +10,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
 @Path("/user")
 public class User {
+    private static String DATA_PATH="/Users/davidma/Desktop/data/";
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
@@ -58,7 +60,7 @@ public class User {
             user.setId(id);
         }
         if(id != null){
-            File userFile = new File("data/" + id);
+            File userFile = new File(DATA_PATH + id);
             if(userFile.exists()){
                 if(!create){
                     userFile.deleteOnExit();
