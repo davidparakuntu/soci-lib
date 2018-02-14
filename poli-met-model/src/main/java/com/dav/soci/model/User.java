@@ -13,6 +13,15 @@ public class User {
 
     private List<String> prefferedUsers;
 
+    private Contact contact;
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
 
     public String getId() {
         return id;
