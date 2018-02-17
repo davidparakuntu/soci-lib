@@ -6,6 +6,7 @@ import org.codehaus.jackson.map.ObjectWriter;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,23 +14,28 @@ import java.io.IOException;
 
 @Path("/user")
 public class User {
-    private static String DATA_PATH="/Users/davidma/Desktop/data/";
-    @GET
+    private static String DATA_PATH="C:\\Users\\dmathias\\Desktop\\soci-lib\\data\\";
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("{id}")
-    public com.dav.soci.model.User getUser(@PathParam("id") String userId){
-        System.out.println("UserID is "+userId);
-        if(userId == null){
-            return null;
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/login")
+    public Response getUser(com.dav.soci.model.User paramUser){
+        String id = paramUser.getId();
+        System.out.println("UserID is "+ id);
+        if(id == null){
+            return Response.status(401).build();
         }
         ObjectReader objectReader = new ObjectMapper().reader(com.dav.soci.model.User.class);
         com.dav.soci.model.User user = null;
         try {
-            user = objectReader.readValue(new File("data/"+userId));
+            user = objectReader.readValue(new File("data/"+id));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return user;
+        if(!user.getPassword().equals(paramUser.getPassword())){
+            return Response.status(401).build();
+        }
+        return Response.ok(user).build();
     }
 
     @POST

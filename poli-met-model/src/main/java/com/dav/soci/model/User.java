@@ -7,6 +7,7 @@ public class User {
 
     private String id;
     private Name name;
+    private String password;
 
     private List<Response> responseList;
     private List<Post> postList;
@@ -17,6 +18,14 @@ public class User {
 
     public Contact getContact() {
         return contact;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setContact(Contact contact) {
